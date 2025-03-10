@@ -504,16 +504,16 @@ class TextEmbeddingModel(nn.Module):
         )
 
         # # Efficient extraction of the last occurrence of the EOS token for each sequence.
-        # eos_mask = (token_ids == self.eos_token_id)
-        # # Create a tensor of positions [0, 1, ..., seq_length-1] and apply the mask.
-        # positions = torch.arange(token_ids.size(1), device=token_ids.device).unsqueeze(0).expand_as(token_ids)
-        # eos_positions = torch.where(eos_mask, positions, torch.full_like(positions, -1))
-        # final_positions, _ = torch.max(eos_positions, dim=1)
-        # # If no EOS token is found, use the last token.
-        # final_positions = torch.where(final_positions == -1, torch.full_like(final_positions, token_ids.size(1) - 1), final_positions)
-        # batch_indices = torch.arange(token_ids.size(0), device=token_ids.device)
-        # embeddings = transformer_out[batch_indices, final_positions]  # (batch_size, embd_dim)
-        embeddings = self.output_head(transformer_out)
+        eos_mask = (token_ids == self.eos_token_id)
+        # Create a tensor of positions [0, 1, ..., seq_length-1] and apply the mask.
+        positions = torch.arange(token_ids.size(1), device=token_ids.device).unsqueeze(0).expand_as(token_ids)
+        eos_positions = torch.where(eos_mask, positions, torch.full_like(positions, -1))
+        final_positions, _ = torch.max(eos_positions, dim=1)
+        # If no EOS token is found, use the last token.
+        final_positions = torch.where(final_positions == -1, torch.full_like(final_positions, token_ids.size(1) - 1), final_positions)
+        batch_indices = torch.arange(token_ids.size(0), device=token_ids.device)
+        embeddings = transformer_out[batch_indices, final_positions]  # (batch_size, embd_dim)
+        # embeddings = self.output_head(transformer_out)
         logger.info(
             "Generated embeddings for batch of size {}",
             embeddings.size(0),
@@ -521,8 +521,11 @@ class TextEmbeddingModel(nn.Module):
         return embeddings
 
 
-# model = TextEmbeddingModel(TransformerConfig())
+model = TextEmbeddingModel(TransformerConfig())
 
-# input = torch.randint(0, 10000, (1, 10))
-# output = model(input)
-# print(output.shape)
+input = torch.randint(0, 10000, (1, 10))
+
+with torch.no_grad():
+    output = model(input)
+    
+print(output.shape)
