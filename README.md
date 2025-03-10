@@ -57,7 +57,7 @@ This design ensures that the model is both computationally efficient and highly 
 Clone this repository and install the required dependencies:
 
 ```bash
-git clone https://github.com/your_username/transformer-embedding-model.git
+git clone https://github.com/kyegomez/open-text-embedding-ada-002.git
 cd transformer-embedding-model
 pip install -r requirements.txt
 ```
@@ -116,7 +116,7 @@ If you use this implementation or derive insights from this repository in your r
 @misc{kye2023ada,
   title = {Open Source Replication of OpenAI's text-embedding-ada-002},
   author = {Kye Gomez},
-  year = {2023},
+  year = {2025},
   note = {Accessed: 2025-03-09},
   url = {https://github.com/kyegomez/open-text-embedding-ada-002}
 }
