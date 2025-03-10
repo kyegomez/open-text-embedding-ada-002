@@ -521,11 +521,11 @@ class TextEmbeddingModel(nn.Module):
         return embeddings
 
 
-model = TextEmbeddingModel(TransformerConfig())
+# model = TextEmbeddingModel(TransformerConfig())
 
-input = torch.randint(0, 10000, (1, 10))
+# input = torch.randint(0, 10000, (1, 10))
 
-with torch.no_grad():
-    output = model(input)
+# with torch.no_grad():
+#     output = model(input)
     
-print(output.shape)
+# print(output.shape)
