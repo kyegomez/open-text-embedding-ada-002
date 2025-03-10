@@ -88,17 +88,14 @@ config = TransformerConfig(
     layer_norm_eps=1e-5,
 )
 
-# Instantiate the model (using eos_token_id=2 for [EOS])
-model = TextEmbeddingModel(config, eos_token_id=2)
-model.eval()
 
-# Prepare dummy tokenized input (batch_size=2, sequence_length=128)
-dummy_input = tensor([[1, 5, 23, 456, 2] + [0]*123,
-                      [34, 76, 89, 2] + [0]*124])
-# Forward pass to obtain embeddings
+input = torch.randint(0, 10000, (1, 10))
+
 with torch.no_grad():
-    embeddings = model(dummy_input)
-print("Embeddings shape:", embeddings.shape)
+    output = model(input)
+    
+print(output.shape)
+
 ```
 
 ## Code Structure
