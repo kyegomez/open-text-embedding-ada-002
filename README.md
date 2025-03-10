@@ -127,7 +127,7 @@ If you use this implementation or derive insights from this repository in your r
   author = {Kye Gomez},
   year = {2023},
   note = {Accessed: 2025-03-09},
-  url = {https://github.com/KyeGomez/ada-replication}
+  url = {https://github.com/kyegomez/open-text-embedding-ada-002}
 }
 ```
 
